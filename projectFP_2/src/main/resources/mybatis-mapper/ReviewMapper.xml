@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.projectfp_2.repository.ReviewMapper">
+
+	<resultMap id="reviewResultMap" type="com.yong.projectfp_2.model.Review">
+		<id property="reviewNum" column="reviewNum"/>
+		<result property="reviews" column="reviews"/>
+		<result property="regdate" column="regdate"/>
+		<result property="userNum" column="userNum"/>
+		<result property="ftNum" column="ftNum"/>
+		<result property="rating" column="rating"/>
+		<result property="averageRating" column="averageRating"/>
+	</resultMap>
+
+	<!-- 쿼리 매핑 -->
+	<select id="getReviewsByFestivalId" parameterType="int" resultMap="reviewResultMap">
+		select * from review
+		WHERE ftNum = #{ftNum};
+	</select>
+
+	<insert id="insertReview" parameterType="com.yong.projectfp_2.model.Review">
+		INSERT INTO review (writer, reviews, regdate, userNum, ftNum, rating) VALUES (
+		   #{writer},
+		   #{reviews},
+		    now(),
+		    #{userNum},
+		    #{ftNum},
+		    #{rating}
+		)
+	</insert>
+
+	<delete id="deleteReview" parameterType="int">
+		delete from review where #{reviewNum}
+	</delete>
+
+	<update id="updateReview" parameterType="com.yong.projectfp_2.model.Review">
+		update review set reviews = #{reviews},
+						  rating= #{rating}
+		where userNum = #{userNum}
+	</update>
+
+	<select id="averageRating" resultType="Double">
+		select coalesce(round(AVG(rating),1), 0.0) from review where ftNum = #{ftNum}
+	</select>
+</mapper>

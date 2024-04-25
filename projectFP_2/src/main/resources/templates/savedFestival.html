@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>저장된 축제 정보</title>
+	<link rel="stylesheet" type="text/css" href="/savedFestival.css">
+	<link rel="stylesheet" type="text/css" href="/header.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/weather.js"></script>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div class="container">
+	<h1>축제 목록</h1>
+	<div th:each="save : ${savedFestivals}">
+		<div class="saved">
+				<h2 >[[${save.title}]]</h2>
+				<p>
+					<strong>시작일:</strong> [[${save.startdate}]]
+				</p>
+				<p>
+					<strong>종료일:</strong> [[${save.enddate}]]
+				</p>
+				<p>
+					<strong>장소:</strong> [[${save.place}]]
+				</p>
+				<p>
+					<strong>가격:</strong>  [[${save.price}]]
+				</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

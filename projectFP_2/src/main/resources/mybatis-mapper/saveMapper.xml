@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.projectfp_2.repository.SaveMapper">
+
+
+	<select id="saveList" resultType="com.yong.projectfp_2.model.Save">
+		select * from save where
+		userNum = #{userNum}
+	</select>
+
+	<insert id="insertSave" parameterType="com.yong.projectfp_2.model.Save">
+		INSERT INTO save(userNum,
+		ftNum)
+		VALUES (#{userNum}, #{ftNum})
+	</insert>
+
+	<delete id="deleteSave" parameterType="int">
+		delete from save where
+		saveNum = #{saveNum}
+	</delete>
+	<select id="getSavedFestivals" resultType="com.yong.projectfp_2.model.Festival">
+		SELECT f.ftNum as ftNum, f.title title, f.startdate startdate, f.enddate enddate, f.place place, f.price price
+		FROM save s
+				 INNER JOIN festival f ON s.ftNum = f.ftNum
+		WHERE s.userNum = #{userNum}
+	</select>
+</mapper>

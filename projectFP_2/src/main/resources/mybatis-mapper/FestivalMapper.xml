@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.projectfp_2.repository.FestivalMapper">
+
+
+    <select id="selectOneFT"  resultType="com.yong.projectfp_2.model.Festival">
+		SELECT * from festival where ftNum = #{ftNum}
+    </select>
+
+    <select id="FTList" resultType="com.yong.projectfp_2.model.Festival">
+          select * from festival
+    </select>
+
+    <insert id="insertFT" parameterType="com.yong.projectfp_2.model.Festival" useGeneratedKeys="true" keyProperty="ftNum">
+        INSERT INTO festival(title, startdate, enddate, place, price) values(
+        	#{title},
+        	#{startdate},
+        	#{enddate},
+        	#{place},
+        	#{price}
+        )
+    </insert>
+
+	<delete id="deleteFT" parameterType="int">
+		delete from festival where ftNum =  #{ftNum}	
+	</delete>
+	
+	<update id="updateFT" parameterType="com.yong.projectfp_2.model.Festival">
+		update festival set title = #{title},
+							startdate = #{startdate},
+        					enddate = #{enddate},
+							place = #{place}, 
+							price = #{place}
+							where ftNum = #{ftNum}
+	</update>
+
+	<select id="getFestivalsByCountMonth" resultType="int">
+		SELECT count(*)
+		FROM festival
+		WHERE MONTH(startdate) = #{month} OR MONTH(enddate) = #{month}
+	</select>
+
+	<select id="getFestivalCount" resultType="int">
+		select count(*) from festival
+	</select>
+
+	<select id="getFestivalsByMonthPaging"  resultType="com.yong.projectfp_2.model.Festival">
+		SELECT *
+		FROM festival
+		WHERE (MONTH(startdate) = #{month} OR MONTH(enddate) = #{month})
+		ORDER BY startdate
+			LIMIT #{page}, #{size}
+	</select>
+
+	<select id="getFestivalsPaging"  resultType="com.yong.projectfp_2.model.Festival">
+		SELECT * FROM festival
+		ORDER BY startdate
+			LIMIT #{page}, #{size}
+	</select>
+
+	<insert id="insertBoardFileList" parameterType="com.yong.projectfp_2.model.FestivalFile">
+		<![CDATA[
+			INSERT INTO FestivalFile
+			(
+				ftNum,
+				originalFileName,
+				storedFilePath,
+				fileSize
+			)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+			(
+			#{item.ftNum},
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize}
+			)
+		</foreach>
+	</insert>
+
+	<select id="getFestivalsByStartDate" resultType="com.yong.projectfp_2.model.Festival">
+		SELECT *
+		FROM festival
+		WHERE ((YEAR(startdate) = #{year} AND MONTH(startdate) = #{month} AND DAY(startdate) = #{day})
+			OR (YEAR(enddate) = #{year} AND MONTH(enddate) = #{month} AND DAY(enddate) = #{day}))
+		</select>
+
+	<!-- 축제의 주소를 가져오는 쿼리 -->
+	<select id="getFestivalAddress" resultType="String">
+		SELECT place
+		FROM festival
+		WHERE ftNum = #{ftNum}
+	</select>
+
+</mapper>

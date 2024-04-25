@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul,
+ol {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* header */
+header .inner {
+    width: 1100px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+header .inner #main_img {
+    height: 100px; /* 로고 이미지 높이 조정 */
+}
+header .inner p {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #444;
+}
+header .inner .util {
+    position: absolute;
+    top: 40px;
+    right: 30px;
+}
+header .inner .util li {
+    float: left;
+    margin-left: 10px; /* 로그인/회원가입 등의 버튼 간격 조정 */
+}
+header .inner .util li a {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+header .inner .util li a:hover {
+    color: #333;
+}
+header .inner #gnb {
+    position: absolute;
+    bottom: -10px;
+    right: 300px;
+}
+header .inner #gnb li {
+    float: left;
+    margin-left: 10px; /* 내비게이션 메뉴 간격 조정 */
+    border-radius: 10px;
+    border: 2px ridge; /* li 요소에 테두리 추가 */
+    height: 55px;
+    /* li 요소에 대한 스타일 */
+}
+
+header .inner #gnb li a {
+    display: block;
+    font-size: 15px;
+    color: #555;
+    padding: 17px 40px; /* 내부 패딩을 조정하여 글자의 위치를 일관되게 유지 */
+    text-decoration: none;
+    height: 100%; /* 부모 요소(li)의 높이를 100%로 설정 */
+    box-sizing: border-box; /* 내부 패딩과 테두리가 요소의 크기에 포함되도록 설정 */
+    transition: all 0.3s ease; /* 모든 속성에 대한 변화를 0.3초 동안 부드럽게 진행 */
+}
+
+header .inner #gnb li:hover {
+    border-color: #838282; /* 호버 상태에서 테두리 색상 변경 */
+}
+
+header .inner #gnb li a:hover {
+    background-color: #838282;
+    color: #fff;
+}
+#weather{
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 60%;
+    transform: translateX(-50%);
+    margin-top: 30px;
+}

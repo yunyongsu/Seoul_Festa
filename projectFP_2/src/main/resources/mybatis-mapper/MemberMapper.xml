@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.projectfp_2.repository.MemberMapper">
+
+    <select id="selectOneMember" resultType="com.yong.projectfp_2.model.Member">
+       select id, pw, email from member where userNum = #{userNum}
+    </select>
+    <select id="selectLogin" resultType="com.yong.projectfp_2.model.Member">
+			select * from member where id = #{id} and pw = #{pw}
+		</select>
+     <select id="SelectMemberById" resultType="com.yong.projectfp_2.model.Member">
+       select pw, email, regdate from member where id = #{id}
+    </select>
+
+    <select id="MemberList" resultType="com.yong.projectfp_2.model.Member">
+          select * from member
+    </select>
+
+    <insert id="insertMember" parameterType="com.yong.projectfp_2.model.Member" useGeneratedKeys="true" keyProperty="userNum">
+        INSERT INTO member(id, pw, email, regdate) values(
+        	#{id},
+        	#{pw},
+        	#{email},
+        	now()
+        )
+    </insert>
+
+	<delete id="deleteMember" parameterType="int">
+		delete from member where userNum =  #{userNum}	
+	</delete>
+
+	<update id="updateMember" parameterType="com.yong.projectfp_2.model.Member">
+		update member set id = #{id},
+		                  pw = #{pw},
+							email = #{email}
+							where userNum = #{userNum}
+	</update>
+
+
+</mapper>

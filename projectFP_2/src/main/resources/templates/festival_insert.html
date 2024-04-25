@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>축제 등록</title>
+    <link rel="stylesheet" type="text/css" href="/festival_insert.css">
+    <link rel="stylesheet" type="text/css" href="/header.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/weather.js"></script>
+
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div class="container">
+    <h1>축제 등록</h1>
+    <form th:action="@{/insertFT}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" th:required="required">
+        </div>
+        <div class="form-group">
+            <label for="startdate">시작일:</label>
+            <input type="date" id="startdate" name="startdate" th:required="required">
+        </div>
+        <div class="form-group">
+            <label for="enddate">종료일:</label>
+            <input type="date" id="enddate" name="enddate" th:required="required">
+        </div>
+        <div class="form-group">
+            <label for="place">장소:</label>
+            <input type="text" id="place" name="place" th:required="required">
+        </div>
+        <div class="form-group">
+            <label for="price">가격:</label>
+            <input type="text" id="price" name="price" th:required="required">
+        </div>
+        <input type="file" id="files" name="files" multiple="multiple">
+        <div class="form-group">
+            <input type="submit" value="등록하기">
+        </div>
+    </form>
+    <a href="main" class="button"> home </a>
+</div>
+</body>
+</html>
